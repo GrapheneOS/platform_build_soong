@@ -596,8 +596,20 @@ func (sanitize *sanitize) flags(ctx ModuleContext, flags Flags) Flags {
 	}
 
 	if !sanitize.Properties.SanitizerEnabled && !sanitize.Properties.UbsanRuntimeDep {
+		flags.Local.CFlags = append(flags.Local.CFlags, "-fwrapv")
 		return flags
 	}
+
+        wrapv := true
+        for _, element := range sanitize.Properties.Sanitizers {
+                if (element == "signed-integer-overflow" || element == "integer" || element == "undefined") {
+                        wrapv = false
+                        break
+                }
+        }
+        if wrapv {
+                flags.Local.CFlags = append(flags.Local.CFlags, "-fwrapv")
+        }
 
 	if Bool(sanitize.Properties.Sanitize.Address) {
 		if ctx.Arch().ArchType == android.Arm {
