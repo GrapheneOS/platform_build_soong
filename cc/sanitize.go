@@ -751,8 +751,21 @@ func toDisableUnsignedShiftBaseChange(flags []string) bool {
 
 func (s *sanitize) flags(ctx ModuleContext, flags Flags) Flags {
 	if !s.Properties.SanitizerEnabled && !s.Properties.UbsanRuntimeDep {
+		flags.Local.CFlags = append(flags.Local.CFlags, "-fwrapv")
 		return flags
 	}
+
+	wrapv := true
+	for _, element := range s.Properties.Sanitizers {
+		if (element == "signed-integer-overflow" || element == "integer" || element == "undefined") {
+			wrapv = false
+			break
+		}
+	}
+	if wrapv {
+		flags.Local.CFlags = append(flags.Local.CFlags, "-fwrapv")
+	}
+
 	sanProps := &s.Properties.SanitizeMutated
 
 	if Bool(sanProps.Address) {
