@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+chrt -bp 0 $$
+
 # To track how long we took to startup.
 case $(uname -s) in
   Darwin)
