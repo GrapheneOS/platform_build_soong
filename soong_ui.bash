@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+chrt -bp 0 $$
+
 # To track how long we took to startup. %N isn't supported on Darwin, but
 # that's detected in the Go code, which skips calculating the startup time.
 export TRACE_BEGIN_SOONG=$(date +%s%N)
