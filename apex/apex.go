@@ -570,6 +570,7 @@ func makeApexAvailableBaseline() map[string][]string {
 		"libdexfile_support",
 		"libdexfile_support_static",
 		"libdl_static",
+		"libhardened_malloc",
 		"libjemalloc5",
 		"liblinker_main",
 		"liblinker_malloc",
