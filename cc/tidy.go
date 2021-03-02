@@ -82,7 +82,7 @@ func (tidy *tidyFeature) flags(ctx ModuleContext, flags Flags) Flags {
 		return flags
 	}
 
-	flags.Tidy = true
+	flags.Tidy = false
 
 	// Add global WITH_TIDY_FLAGS and local tidy_flags.
 	withTidyFlags := ctx.Config().Getenv("WITH_TIDY_FLAGS")
