@@ -430,7 +430,7 @@ func dexpreoptCommand(ctx android.BuilderContext, globalSoong *GlobalSoongConfig
 		} else if global.DefaultCompilerFilter != "" {
 			compilerFilter = global.DefaultCompilerFilter
 		} else {
-			compilerFilter = "quicken"
+			compilerFilter = "speed"
 		}
 		if module.EnforceUsesLibraries {
 			// If the verify_uses_libraries check failed (in this case status file contains a
