@@ -139,6 +139,7 @@ var (
 		"external/googletest":                    Bp2BuildDefaultTrueRecursively,
 		"external/gwp_asan":                      Bp2BuildDefaultTrueRecursively,
 		"external/hamcrest":                      Bp2BuildDefaultTrueRecursively,
+		"external/hardened_malloc":               Bp2BuildDefaultTrueRecursively,
 		"external/icu":                           Bp2BuildDefaultTrueRecursively,
 		"external/icu/android_icu4j":             Bp2BuildDefaultFalse, // java rules incomplete
 		"external/icu/icu4j":                     Bp2BuildDefaultFalse, // java rules incomplete
