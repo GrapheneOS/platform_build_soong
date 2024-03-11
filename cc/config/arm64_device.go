@@ -44,7 +44,6 @@ var (
 		// When Pointer Authentication Codes (PAC) are available, -fstack-protector is unnecessary.
 		"branchprot": {
 			"-mbranch-protection=standard",
-			"-fno-stack-protector",
 		},
 	}
 
