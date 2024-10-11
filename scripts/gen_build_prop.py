@@ -181,14 +181,7 @@ def generate_build_info(args):
 
   # ro.build.display.id is shown under Settings -> About Phone
   if config["BuildVariant"] == "user":
-    # User builds should show:
-    # release build number or branch.buld_number non-release builds
-
-    # Dev. branches should have DISPLAY_BUILD_NUMBER set
-    if config["DisplayBuildNumber"]:
-      print(f"ro.build.display.id?={config['BuildId']}.{config['BuildNumber']} {config['BuildKeys']}")
-    else:
-      print(f"ro.build.display.id?={config['BuildId']} {config['BuildKeys']}")
+    print(f"ro.build.display.id?={config['BuildNumber']} {config['BuildKeys']}")
   else:
     # Non-user builds should show detailed build information (See build desc above)
     print(f"ro.build.display.id?={config['BuildDesc']}")
