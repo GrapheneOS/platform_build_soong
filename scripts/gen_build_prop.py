@@ -371,6 +371,7 @@ def append_additional_system_props(args):
   props.append("ro.force.debuggable=0")
 
   props.append("ro.control_privapp_permissions=enforce")
+  props.append("net.tethering.noprovisioning=true")
 
   config["ADDITIONAL_SYSTEM_PROPERTIES"] = props
 
