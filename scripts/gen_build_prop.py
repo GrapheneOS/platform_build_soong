@@ -370,6 +370,8 @@ def append_additional_system_props(args):
   # This property is set by flashing debug boot image, so default to false.
   props.append("ro.force.debuggable=0")
 
+  props.append("ro.control_privapp_permissions=enforce")
+
   config["ADDITIONAL_SYSTEM_PROPERTIES"] = props
 
 def append_additional_vendor_props(args):
