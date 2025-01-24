@@ -369,6 +369,9 @@ def append_additional_system_props(args):
   # System clock update will be skipped if the difference is below this value,
   # default is 2000 ms as of Android 14.
   props.append("ro.sys.time_detector_update_diff=50")
+  if config["BuildVariant"] == "user":
+    # at least one app (Revolut) refuses to work with yellow verifiedbootstate
+    props.append("ro.appcompat_override.ro.boot.verifiedbootstate=green")
 
   config["ADDITIONAL_SYSTEM_PROPERTIES"] = props
 
