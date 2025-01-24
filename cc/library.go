@@ -1529,22 +1529,6 @@ func (library *libraryDecorator) crossVersionAbiDiff(ctx android.ModuleContext,
 		isLlndk, true /* allowExtensions */, sourceVersion, errorMessage)
 }
 
-func (library *libraryDecorator) sameVersionAbiDiff(ctx android.ModuleContext,
-	sourceDump, referenceDump android.Path,
-	baseName, nameExt string, isLlndk bool, lsdumpTagName string) {
-
-	libName := strings.TrimSuffix(baseName, filepath.Ext(baseName))
-	errorMessage := "error: Please update ABI references with: $$ANDROID_BUILD_TOP/development/vndk/tools/header-checker/utils/create_reference_dumps.py --lib " + libName + " --lib-variant " + lsdumpTagName
-
-	targetRelease := ctx.Config().Getenv("TARGET_RELEASE")
-	if targetRelease != "" {
-		errorMessage += " --release " + targetRelease
-	}
-
-	library.sourceAbiDiff(ctx, sourceDump, referenceDump, baseName, nameExt,
-		isLlndk, false /* allowExtensions */, "current", errorMessage)
-}
-
 func (library *libraryDecorator) optInAbiDiff(ctx android.ModuleContext,
 	sourceDump, referenceDump android.Path,
 	baseName, nameExt string, refDumpDir string, lsdumpTagName string) {
@@ -1664,26 +1648,6 @@ func (library *libraryDecorator) linkSAbiDumpFiles(ctx ModuleContext, deps PathD
 			if prevDumpFile.Valid() {
 				library.crossVersionAbiDiff(ctx, sourceDump, prevDumpFile.Path(),
 					fileName, nameExt+prevVersion, isLlndk, currVersion, prevDumpDir)
-			}
-			// Check against the current version.
-			sourceDump = implDump
-			if isLlndk && currVendorVersion != "" {
-				currVersion = currVendorVersion
-				if android.IsTrunkStableVendorApiLevel(currVersion) {
-					sourceDump = llndkDump
-				}
-			} else {
-				currVersion = currSdkVersion
-				if isApex && (!ctx.Config().PlatformSdkFinal() ||
-					ctx.Config().PlatformSdkVersion().FinalInt() > 34) {
-					sourceDump = apexVariantDump
-				}
-			}
-			currDumpDir := filepath.Join(dumpDir, currVersion, binderBitness)
-			currDumpFile := getRefAbiDumpFile(ctx, currDumpDir, fileName)
-			if currDumpFile.Valid() {
-				library.sameVersionAbiDiff(ctx, sourceDump, currDumpFile.Path(),
-					fileName, nameExt, isLlndk, string(tag))
 			}
 		}
 
