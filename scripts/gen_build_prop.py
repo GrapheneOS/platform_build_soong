@@ -372,6 +372,9 @@ def append_additional_system_props(args):
 
   props.append("ro.control_privapp_permissions=enforce")
   props.append("net.tethering.noprovisioning=true")
+  if config["BuildVariant"] == "user":
+    # at least one app (Revolut) refuses to work with yellow verifiedbootstate
+    props.append("ro.appcompat_override.ro.boot.verifiedbootstate=green")
 
   config["ADDITIONAL_SYSTEM_PROPERTIES"] = props
 
