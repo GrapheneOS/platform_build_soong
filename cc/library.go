@@ -1645,7 +1645,7 @@ func (library *libraryDecorator) linkSAbiDumpFiles(ctx ModuleContext, deps PathD
 			}
 			prevDumpDir := filepath.Join(dumpDir, prevVersion, binderBitness)
 			prevDumpFile := getRefAbiDumpFile(ctx, prevDumpDir, fileName)
-			if prevDumpFile.Valid() {
+			if prevDumpFile.Valid() && false {
 				library.crossVersionAbiDiff(ctx, sourceDump, prevDumpFile.Path(),
 					fileName, nameExt+prevVersion, isLlndk, currVersion, prevDumpDir)
 			}
