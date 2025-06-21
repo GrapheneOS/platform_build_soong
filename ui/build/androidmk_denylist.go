@@ -31,7 +31,7 @@ var androidmk_denylist []string = []string{
 	"development/",
 	"device/common/",
 	"device/generic/",
-	"device/google/",
+	// "device/google/",
 	"device/google_car/",
 	"device/sample/",
 	"external/",
