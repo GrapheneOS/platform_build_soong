@@ -61,6 +61,7 @@ if (($#==1)); then
 #! /bin/bash
 # source=$source
 # config=$config
+unset OUT_DIR
 declare -r cmd=\$(printf ' %q' "\$@")
 "$source/prebuilts/build-tools/linux-x86/bin/nsjail"\
  -Mo -q -e -t 0\
