@@ -408,30 +408,7 @@ func dexpreoptCommand(ctx android.BuilderContext, globalSoong *GlobalSoongConfig
 	}
 
 	if !android.PrefixInList(preoptFlags, "--compiler-filter=") {
-		var compilerFilter string
-		if systemServerJars.ContainsJar(module.Name) {
-			if global.SystemServerCompilerFilter != "" {
-				// Use the product option if it is set.
-				compilerFilter = global.SystemServerCompilerFilter
-			} else if profile != nil {
-				// Use "speed-profile" for system server jars that have a profile.
-				compilerFilter = "speed-profile"
-			} else {
-				// Use "speed" for system server jars that do not have a profile.
-				compilerFilter = "speed"
-			}
-		} else if contains(global.SpeedApps, module.Name) || contains(global.SystemServerApps, module.Name) {
-			// Apps loaded into system server, and apps the product default to being compiled with the
-			// 'speed' compiler filter.
-			compilerFilter = "speed"
-		} else if profile != nil {
-			// For non system server jars, use speed-profile when we have a profile.
-			compilerFilter = "speed-profile"
-		} else if global.DefaultCompilerFilter != "" {
-			compilerFilter = global.DefaultCompilerFilter
-		} else {
-			compilerFilter = "speed"
-		}
+		compilerFilter := "speed"
 		if module.EnforceUsesLibraries {
 			// If the verify_uses_libraries check failed (in this case status file contains a
 			// non-empty error message), then use "verify" compiler filter to avoid compiling any
